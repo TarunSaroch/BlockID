@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlockID</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
+
+</head>
+<body>
+    <main>  
+        <section>
+            <div class="left-section">
+                <p class="head-1">
+                    Safe Haven for your Medical<br>Data
+                </p>
+                <p class="head-2">
+                    "Prescriptions, Data Records, phone numbers?"<br>Bring it on! With blockchain technology, your medical data is locked up. <p class="inner-text">#takeonthechallenge</p>
+                </p>
+                <button id="btn" onclick="connectMetamask()">Connect</button> <button id="btn" style="margin-left: 80px;" onclick="aipro()">AI Prognosis</button>
+                <p id="accountArea"></p>
+            </div>
+        </section>
+        <section>
+            <div class="right-section">
+                <video height="100%" width="100%" autoplay muted loop id="myVideo">
+                    <source src="vid.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
+    </main>
+    <section class="patient-area" id="patient-area">
+        
+    </section>
+    <section id="see-data" class="see-data">
+        
+    </section>
+<script>
+    let account;
+    const connectMetamask = async() => {
+        if (window.ethereum !== "undefined") {
+            const accounts = await ethereum.request({
+                method: "eth_requestAccounts"
+            });
+            account = accounts[0];
+            // document.getElementById("accountArea").innerHTML = `Account is: ${account}`;
+            document.getElementById("btn").innerHTML = `Connected`;
+            document.getElementById("patient-area").innerHTML = `
+                <div class="greet-container">
+                    Welcome
+                </div>
+                <div id="name" class="name">
+                    Data Not Found
+                </div>
+                <div id="button-container" class="button-container">
+                    <button class="button-2" onclick="redirect()">Store Data</button>
+                    <button class="button-2" onclick="seedata()" style="margin-left: 80px;">See Data</button>
+                </div>
+            `;
+            connectContract();   
+            
+            
+
+        }
+    }
+    async function connectContract() {
+        const ABI = [
+{
+    "inputs": [],
+    "name": "getUserData",
+    "outputs": [
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+},
+{
+    "inputs": [
+        {
+            "internalType": "address",
+            "name": "userAddress",
+            "type": "address"
+        }
+    ],
+    "name": "getUserDataByAddress",
+    "outputs": [
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+},
+{
+    "inputs": [
+        {
+            "internalType": "string",
+            "name": "fullName",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "bloodgroup",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "gender",
+            "type": "string"
+        },
+        {
+            "internalType": "uint256",
+            "name": "age",
+            "type": "uint256"
+        },
+        {
+            "internalType": "string",
+            "name": "email",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "phoneNo",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "maritalStatus",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "healthid",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "allergies",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "pres",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "surgery",
+            "type": "string"
+        }
+    ],
+    "name": "storeUserData",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+}
+];
+        const Address = "0xc565B1Bf033FfbD92c41aa73546975de9DFF74Bc";
+        window.web3 = await new Web3(window.ethereum);
+        window.contract = await new window.web3.eth.Contract(ABI, Address);
+        console.log("connected to smart contract");
+        readContract();
+
+        var accnt = `${account}`;
+            // Create a QRCode instance and generate the QR code
+            var qrcode = new QRCode(document.getElementById("qrcode"), {
+                text: accnt,
+                width: 300,
+                height: 300,
+            });
+        document.getElementById("acc-mannually").innerHTML = `${account}`;
+    }
+    async function readContract() {
+		const userAddress = "USER_ADDRESS";
+		let acc = account;
+		const userData = await contract.methods.getUserDataByAddress(acc).call();
+		const fullname = userData[0];   
+		const bloodgrp = userData[1];
+		const gender = userData[2];
+		const age = userData[3];
+		const email = userData[4];
+		const phone = userData[5];
+		const marital = userData[6];
+		const ayush = userData[7];
+		const allergies = userData[8];
+		const past = userData[9];
+		const surgeries = userData[10];
+		const data = `
+                    Full Name: ${fullname}
+                    Blood Group: ${bloodgrp}
+                    Gender: ${gender}
+                    Age: ${age}
+                    Email: ${email}
+                    Phone: ${phone}
+                    Marital: ${marital}
+                    Ayush: ${ayush}
+                    Allergies: ${allergies}
+                    Past Medical History: ${past}
+                    Surgeries: ${surgeries}`;
+		console.log(data);
+        document.getElementById("name").innerHTML = `${fullname}`;
+        document.getElementById("age-value").innerHTML = `${age}`;
+        document.getElementById("gender-value").innerHTML = `${gender}`;
+        document.getElementById("bg-value").innerHTML = `${bloodgrp}`;
+        document.getElementById("ms-value").innerHTML = `${marital}`;
+
+        document.getElementById("past-med").innerHTML = `${past}`;
+        document.getElementById("any-allergies").innerHTML = `${allergies}`;
+        document.getElementById("any-srgery").innerHTML = `${surgeries}`;
+
+        document.getElementById("id-value").innerHTML = `${ayush}`;
+
+        document.getElementById("email-value").innerHTML = `${email}`;
+        document.getElementById("ph-value").innerHTML = `+91-${phone}`;
+        
+    }
+
+    function aipro(){
+        window.open('http://192.168.1.182:8501', '_blank');
+    }
+
+    function redirect() {
+        window.open('/Blockchain Implementation/insert.html', '_blank');
+    }
+
+    function showdata() {
+        document.getElementById("name").innerHTML = `${fullname}`;
+    }
+
+    function seedata(){
+        document.getElementById("see-data").innerHTML = `
+        <div class="left-inner">
+            <div class="one-det">
+                <div class="squaricle">
+                    <div class="label">
+                        Age
+                    </div>
+                    <div id="age-value" class="value">
+                        --
+                    </div>
+                </div>
+                <div class="squaricle">
+                    <div class="label">
+                        Gender
+                    </div>
+                    <div id="gender-value" class="value">
+                        --
+                    </div>
+                </div>
+                <div class="squaricle">
+                    <div class="label">
+                        Blood Group
+                    </div>
+                    <div id="bg-value" class="value">
+                        --
+                    </div>
+                </div>
+                <div class="squaricle">
+                    <div class="label">
+                        Marital Status
+                    </div>
+                    <div id="ms-value" class="value">
+                        --
+                    </div>
+                </div>
+            </div>
+            <div class="next-det">
+                <div class="next-label">
+                    Past Medication / Prescriptions
+                </div>
+                <div id="past-med" class="next-value">
+                    --
+                </div>
+                <div class="next-label">
+                    Any Allergies
+                </div>
+                <div id="any-allergies" class="next-value">
+                    --
+                </div>
+                <div class="next-label">
+                    Any Surgeries
+                </div>
+                <div id="any-srgery" class="next-value">
+                    --
+                </div>
+            </div>
+            <div class="next-id">
+                <div class="id-label">
+                    Health ID Number
+                </div>
+                <div id="id-value" class="id-value">
+                    XX-XXXX-XXXX-XXXX
+                </div>
+            </div>
+            <div class="email-id">
+                <div class="email-label">
+                    Email Address
+                </div>
+                <div id="email-value" class="email-value">
+                    --
+                </div>
+            </div>
+            <div class="email-id">
+                <div class="email-label">
+                    Phone Number
+                </div>
+                <div id="ph-value" class="email-value">
+                    --
+                </div>
+            </div>
+        </div>
+        
+        <div class="right-inner">
+            Ask doctor to scan QR
+            <div class="qr-container">
+                <div id="qrcode" class="qrcode"></div>
+            </div>
+            <span class="or">or</span>
+            <span class="type">
+                Type the secret key mannually
+            </span>
+            <span id="acc-mannually" class="acc-mannually">
+                --
+            </span>
+        </div>`;
+
+        connectContract();
+        document.getElementById("button-container").innerHTML = ` `;
+    }
+
+</script>
+</body>
+</html>

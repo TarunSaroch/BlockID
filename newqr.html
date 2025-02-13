@@ -1,0 +1,445 @@
+<!-- Index.html file -->
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head> 
+	<meta charset="UTF-8"> 
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0"> 
+	<link rel="stylesheet" href="style.css"> 
+	<title>Doc Screen 
+	</title> 
+
+    <style>
+        /* style.css file*/
+body { 
+	display: flex; 
+	justify-content: center; 
+    font-family: 'Space Grotesk', sans-serif;
+	margin: 0; 
+	padding: 0; 
+	height: 100vh; 
+	box-sizing: border-box; 
+	text-align: center; 
+	background: rgb(0, 0, 0); 
+    
+} 
+.container { 
+	width: 100%; 
+	max-width: 500px; 
+	margin: 5px; 
+} 
+
+.container h1 { 
+	color: #ffffff; 
+} 
+
+.section { 
+	background-color: #ffffff; 
+	padding: 50px 30px; 
+	border: 1.5px solid #b2b2b2; 
+	border-radius: 0.25em; 
+	box-shadow: 0 20px 25px rgba(0, 0, 0, 0.25); 
+} 
+
+#my-qr-reader { 
+	padding: 20px !important; 
+	border: 1.5px solid #b2b2b2 !important; 
+	border-radius: 8px; 
+    
+} 
+
+#my-qr-reader img[alt="Info icon"] { 
+	display: none; 
+} 
+
+#my-qr-reader img[alt="Camera based scan"] { 
+	width: 100px !important; 
+	height: 100px !important; 
+} 
+
+button { 
+	padding: 10px 20px; 
+	border: 1px solid #b2b2b2; 
+	outline: none; 
+	border-radius: 0.25em; 
+	color: white; 
+	font-size: 15px; 
+	cursor: pointer; 
+	margin-top: 15px; 
+	margin-bottom: 10px; 
+	background-color: #008000ad; 
+	transition: 0.3s background-color; 
+} 
+
+button:hover { 
+	background-color: #008000; 
+} 
+
+#html5-qrcode-anchor-scan-type-change { 
+	text-decoration: none !important; 
+	color: #1d9bf0; 
+} 
+
+video { 
+	width: 100% !important; 
+	border: 1px solid #b2b2b2 !important; 
+	border-radius: 0.25em; 
+    transform: scaleX(-1);
+}
+
+    </style>
+<!-- <link rel="stylesheet" href="style.css"> -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
+    <style>
+.righthandside {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    /* color: #004aad; */
+    font-size: 3rem;
+	text-align: justify;
+}
+#dataArea{
+    font-size: 1.5rem;
+}
+.newarea{
+	display: flex;
+	flex-direction: column;
+}
+    </style>
+
+
+</head> 
+
+<body> 
+	<span class="newarea">
+		<div id="container" class="container"> 
+			<h1>Scan QR Codes</h1> 
+			<div class="section"> 
+				<div id="my-qr-reader"> 
+				</div> 
+			</div> 
+		</div> 
+	
+	
+	
+	
+		<div id="docarea" class="righthandside">
+	
+		</div>
+	</span>
+	
+
+
+
+
+	<script
+		src="https://unpkg.com/html5-qrcode"> 
+	</script> 
+	<script src="script.js"></script> 
+
+    <script>
+        function domReady(fn) { 
+    if ( 
+        document.readyState === "complete" || 
+        document.readyState === "interactive"
+    ) { 
+        setTimeout(fn, 1000); 
+    } else { 
+        document.addEventListener("DOMContentLoaded", fn); 
+    } 
+} 
+  
+domReady(function () { 
+	let fetched;
+
+	function onScanSuccess(decodeText, decodeResult) { 
+		if (fetched) {
+			return; // Exit the function if fetched is already set
+		}
+		
+		fetched = decodeText;
+		
+		// Your other code here
+		document.getElementById("container").innerHTML = ` `;
+		document.getElementById("docarea").innerHTML = `Welcome Doc 👋
+        <div class="flex md:mt-4 mt-6">
+            <button onclick="connectMetamask()">Fetch</button>
+        </div>
+        <br><br>
+        <p id="dataArea"></p>
+		<p class="decoded"></p>`;
+	}
+
+	
+	
+	// document.getElementById("docarea").innerHTML = `${fetched}`;
+    let htmlscanner = new Html5QrcodeScanner( 
+        "my-qr-reader", 
+        { fps: 10, qrbos: 250 } 
+    ); 
+    htmlscanner.render(onScanSuccess); 
+});
+    </script>
+
+
+
+<script>
+    let account;
+    const connectMetamask = async() => {
+        if (window.ethereum !== "undefined") {
+            const accounts = await ethereum.request({
+                method: "eth_requestAccounts"
+            });
+            account = accounts[0];
+            // document.getElementById("accountArea").innerHTML = `Account is: ${account}`;
+            // document.getElementById("btn").innerHTML = `Connected`;
+        }
+        connectContract(); 
+    }
+    async function connectContract() {
+        const ABI = [
+{
+    "inputs": [],
+    "name": "getUserData",
+    "outputs": [
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+},
+{
+    "inputs": [
+        {
+            "internalType": "address",
+            "name": "userAddress",
+            "type": "address"
+        }
+    ],
+    "name": "getUserDataByAddress",
+    "outputs": [
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+},
+{
+    "inputs": [
+        {
+            "internalType": "string",
+            "name": "fullName",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "bloodgroup",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "gender",
+            "type": "string"
+        },
+        {
+            "internalType": "uint256",
+            "name": "age",
+            "type": "uint256"
+        },
+        {
+            "internalType": "string",
+            "name": "email",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "phoneNo",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "maritalStatus",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "healthid",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "allergies",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "pres",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "surgery",
+            "type": "string"
+        }
+    ],
+    "name": "storeUserData",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+}
+];
+        const Address = "0xc565B1Bf033FfbD92c41aa73546975de9DFF74Bc";
+        window.web3 = await new Web3(window.ethereum);
+        window.contract = await new window.web3.eth.Contract(ABI, Address);
+        console.log("connected to smart contract");
+        readContract();
+    }
+    async function readContract() {
+		const userAddress = "USER_ADDRESS";
+		let acc = account;
+		const userData = await contract.methods.getUserDataByAddress(acc).call();
+		const fullname = userData[0];   
+		const bloodgrp = userData[1];
+		const gender = userData[2];
+		const age = userData[3];
+		const email = userData[4];
+		const phone = userData[5];
+		const marital = userData[6];
+		const ayush = userData[7];
+		const allergies = userData[8];
+		const past = userData[9];
+		const surgeries = userData[10];
+		const data = `
+                    Full Name: ${fullname} <br>
+                    Blood Group: ${bloodgrp} <br>
+                    Gender: ${gender} <br>
+                    Age: ${age} <br>
+                    Email: ${email} <br>
+                    Phone: ${phone} <br>
+                    Marital: ${marital} <br>
+                    Health: ${ayush} <br>
+                    Allergies: ${allergies} <br>
+                    Past Medical History: ${past} <br>
+                    Surgeries: ${surgeries}`;
+        console.log(data);
+        document.getElementById("dataArea").innerHTML = `${data}`;
+    }
+</script>
+
+
+
+</body> 
+
+</html>

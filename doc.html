@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor View</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
+    <style>
+.righthandside {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    /* color: #004aad; */
+    font-size: 3rem;
+}
+#dataArea{
+    font-size: 1.5rem;
+}
+    </style>
+</head>
+<body>
+    <div class="righthandside">
+        Welcome Doc 👋
+        <div class="flex md:mt-4 mt-6">
+            <button onclick="connectMetamask()">Fetch</button>
+        </div>
+        <br><br>
+        <p id="dataArea"></p>
+
+    </div>
+
+<script>
+    let account;
+    const connectMetamask = async() => {
+        if (window.ethereum !== "undefined") {
+            const accounts = await ethereum.request({
+                method: "eth_requestAccounts"
+            });
+            account = accounts[0];
+            // document.getElementById("accountArea").innerHTML = `Account is: ${account}`;
+            // document.getElementById("btn").innerHTML = `Connected`;
+        }
+        connectContract(); 
+    }
+    async function connectContract() {
+        const ABI = [
+{
+    "inputs": [],
+    "name": "getUserData",
+    "outputs": [
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+},
+{
+    "inputs": [
+        {
+            "internalType": "address",
+            "name": "userAddress",
+            "type": "address"
+        }
+    ],
+    "name": "getUserDataByAddress",
+    "outputs": [
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+},
+{
+    "inputs": [
+        {
+            "internalType": "string",
+            "name": "fullName",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "bloodgroup",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "gender",
+            "type": "string"
+        },
+        {
+            "internalType": "uint256",
+            "name": "age",
+            "type": "uint256"
+        },
+        {
+            "internalType": "string",
+            "name": "email",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "phoneNo",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "maritalStatus",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "healthid",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "allergies",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "pres",
+            "type": "string"
+        },
+        {
+            "internalType": "string",
+            "name": "surgery",
+            "type": "string"
+        }
+    ],
+    "name": "storeUserData",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+}
+];
+        const Address = "0xc565B1Bf033FfbD92c41aa73546975de9DFF74Bc";
+        window.web3 = await new Web3(window.ethereum);
+        window.contract = await new window.web3.eth.Contract(ABI, Address);
+        console.log("connected to smart contract");
+        readContract();
+    }
+    async function readContract() {
+		const userAddress = "USER_ADDRESS";
+		let acc = account;
+		const userData = await contract.methods.getUserDataByAddress(acc).call();
+		const fullname = userData[0];   
+		const bloodgrp = userData[1];
+		const gender = userData[2];
+		const age = userData[3];
+		const email = userData[4];
+		const phone = userData[5];
+		const marital = userData[6];
+		const ayush = userData[7];
+		const allergies = userData[8];
+		const past = userData[9];
+		const surgeries = userData[10];
+		const data = `
+                    Full Name: ${fullname} <br>
+                    Blood Group: ${bloodgrp} <br>
+                    Gender: ${gender} <br>
+                    Age: ${age} <br>
+                    Email: ${email} <br>
+                    Phone: ${phone} <br>
+                    Marital: ${marital} <br>
+                    Health: ${ayush} <br>
+                    Allergies: ${allergies} <br>
+                    Past Medical History: ${past} <br>
+                    Surgeries: ${surgeries}`;
+        console.log(data);
+        document.getElementById("dataArea").innerHTML = `${data}`;
+    }
+</script>
+</body>
+</html>

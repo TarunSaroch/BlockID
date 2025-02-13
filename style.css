@@ -1,0 +1,306 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    background-color: #010108;
+}
+main{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    height: 70vh;
+    min-height: 525px;
+}
+main > section {
+    flex-basis: 50%;
+    height: 100%;
+}
+main > section:first-child {
+    /* background-color: #ffcccc; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main > section:last-of-type {
+    background-color: #010108;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button{
+    width: 180px;
+    height: 60px;
+    border-radius: 5px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    color: #fff;
+    border-color: #FF00E5;
+    background-color: #FF00E5;
+}
+button:hover{
+    border-color: #e702d0;
+    background-color: #e702d0;
+}
+.left-section{
+    box-sizing: border-box;
+    padding: 20px;
+    padding-left: 90px;
+    width: 100%;
+}
+.right-section {
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+}
+.head-1{
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    /* color: #004aad; */
+    font-size: 3rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 55px;
+}
+.head-2 {
+    font-family: 'Varela Round', sans-serif;
+    font-weight: 500;
+    margin-top: 50px;
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+.inner-text{
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+.tech{
+    width: 100%;
+    height: 30vh;
+    /* background-color: #e702d0;    */
+}
+.button-2{
+    width: 150px;
+    height: 60px;
+    border-radius: 5px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    color: #fff;
+    border-color: #ffffff;  
+    background-color: #ff00e600;
+}
+.button-2:hover{
+    border-color: #e7024e;
+    background-color: #e7023b;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.greet-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Pacifico', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+.name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 25px;
+}
+.see-data{
+    margin-top: 50px;
+    height: 80vh;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.left-inner{
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+
+    width: 60%;
+    /* height: 100vh; */
+    margin-left: 50px;
+    /* border: #fff 0.5px solid; */
+}
+.one-det{
+    display: flex;
+    flex-direction: row;
+}
+
+.squaricle {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+
+    /* width: 170px;
+    height: 156px; 
+    border-radius: 50px; 
+    background-color: #3498db00; 
+    border: #ffffff 2px solid; */
+
+    margin: 0 auto;
+    padding-top: 20px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    transition: all .2s ease-in-out;
+}
+.squaricle:hover{
+    color: #e702d0;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.label{
+    text-align: center;
+}
+.value{
+    font-family: 'Poppins', sans-serif;
+    margin-top: 0px;
+    text-align: center;
+    font-size: 4.5rem;
+    font-weight: 900;
+}
+.next-det{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-left: 100px;
+    margin-top: 20px;
+}
+.next-label{
+    margin-top: 30px;
+    transition: all .2s ease-in-out;
+    color: #e702d0;
+}
+.next-label:hover{
+    color: #ffffff;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.next-value{
+    font-weight: 500;
+    font-size: large;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 5px;
+    word-wrap: break-word;
+    margin-left: 30px;
+}
+.next-id{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    align-items: center;
+    margin-left: 100px;
+}
+.id-label{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    margin-right: 50px;
+}
+.id-value{
+    font-family: 'Poppins', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    transition: all .2s ease-in-out;
+}
+.id-value:hover{
+    color: #f02457;
+    cursor: pointer;
+    transform: scale(0.9);
+}
+.email-id{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-left: 100px;
+    margin-top: 20px;
+}
+.email-label{
+    color: #e702d0;
+    transition: all .2s ease-in-out;
+}
+.email-label:hover{
+    transform: scale(1.1);
+    color: #fff;
+}
+.email-value{
+    font-weight: 500;
+    font-size: large;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 5px;
+    word-wrap: break-word;
+    margin-left: 30px;
+}
+
+.right-inner{
+    border-left: #ffffff27 1px solid;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.qr-container{
+    margin-top: 20px;
+
+    width: 340px;
+    height: 340px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+.or{
+    margin-top: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;   
+}
+.type{
+    margin-top: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.acc-mannually{
+    margin-top: 10px;
+    background-color: #252525;
+    border-radius: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    height: 30px;
+    width: 450px;
+    font-weight: 500;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
