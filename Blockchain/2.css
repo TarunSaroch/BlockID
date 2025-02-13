@@ -1,0 +1,49 @@
+.sides {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 140px;
+  }
+  
+  .lefthandside {
+    flex: 1;
+    margin-left: 200px;
+    margin-right: 80px;
+    padding: 20px;
+    border: 2px solid #000000;
+    border-radius: 15px; /* Add some spacing between left and right sides */
+  }
+  
+  .righthandside {
+    flex: 1;
+    padding: 20px;
+    margin-left: 10px; /* Add some spacing between left and right sides */
+    /* Add a border to the left side to create a separation line */
+    border: 2px solid #000000;
+    margin-right: 200px;
+    margin-left: 80px;
+    border-radius: 15px;
+  }
+
+  
+  /* Optional: Style the input fields and buttons */
+  input[type="text"] {
+    border: 1px solid #000000;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #357abd;
+  }
+  
+
+  
+  
